@@ -10,8 +10,8 @@ Authors@R: c(
 Maintainer: Davis Vaughan <dvaughan@business-science.io>
 Description: A tidy approach to financial analysis built on top of the 'tibbletime'
   package.
-URL: https://github.com/business-science/tibbletime
-BugReports: https://github.com/business-science/tibbletime/issues
+URL: https://github.com/DavisVaughan/tidyfinance
+BugReports: https://github.com/business-science/DavisVaughan/tidyfinance
 License: What license it uses
 Encoding: UTF-8
 LazyData: true
