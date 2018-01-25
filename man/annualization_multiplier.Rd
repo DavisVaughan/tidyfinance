@@ -23,6 +23,7 @@ The following character annualization specifications are supported.
 \examples{
 
 annualization_multiplier("day")
+annualization_multiplier("2 day")
 annualization_multiplier(250)
 
 }

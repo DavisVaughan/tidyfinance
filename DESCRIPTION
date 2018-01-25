@@ -1,8 +1,17 @@
 Package: tidyquant2
+Type: Package
+Title: Tidy Financial Analysis
 Version: 0.0.0.9000
-Title: What the Package Does (one line, title case)
-Description: What the package does (one paragraph).
-Authors@R: person("First", "Last", , "first.last@example.com", c("aut", "cre"))
+Date: 2018-01-25
+Authors@R: c(
+    person("Davis", "Vaughan", email = "dvaughan@business-science.io", role = c("aut", "cre")),
+    person("Matt", "Dancho", email = "mdancho@business-science.io", role = c("aut"))
+  )
+Maintainer: Davis Vaughan <dvaughan@business-science.io>
+Description: A tidy approach to financial analysis built on top of the 'tibbletime'
+  package.
+URL: https://github.com/business-science/tibbletime
+BugReports: https://github.com/business-science/tibbletime/issues
 License: What license it uses
 Encoding: UTF-8
 LazyData: true

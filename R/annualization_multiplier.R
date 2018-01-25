@@ -3,7 +3,6 @@
 #' Specify either a character annualization period or a numeric annualization multiplier of
 #' your own.
 #'
-#'
 #' @details
 #'
 #' The following character annualization specifications are supported.
@@ -17,6 +16,7 @@
 #' @examples
 #'
 #' annualization_multiplier("day")
+#' annualization_multiplier("2 day")
 #' annualization_multiplier(250)
 #'
 annualization_multiplier <- function(period) {

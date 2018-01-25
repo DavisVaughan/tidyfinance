@@ -6,7 +6,6 @@
 #' @param .tbl_time A `tbl_time` object
 #' @param ... The columns to calculate returns for.
 #' One or more unquoted column names separated by commas.
-#' Positive values select variables; negative values drop variables.
 #' @param type Either `"arithmetic"` or `"log"` returns.
 #' @param suffix For each column specified in `...`, this is the suffix that
 #' is appended onto the name of the new column that corresponds to the return.
@@ -23,31 +22,51 @@
 #'
 #' @export
 calculate_return <- function(.tbl_time, ..., type = "arithmetic",
-                             period = "daily", start_date = NULL,
-                             suffix = "return") {
+                             period = "daily", start_date = NULL, suffix = "return") {
+  UseMethod("calculate_return")
+}
+
+#' @export
+calculate_return.default <- function(.tbl_time, ..., type = "arithmetic",
+                             period = "daily", start_date = NULL, suffix = "return") {
+  glue_stop_not_tbl_time(.tbl_time)
+}
+
+#' @export
+calculate_return.tbl_time <- function(.tbl_time, ..., type = "arithmetic",
+                             period = "daily", start_date = NULL, suffix = "return") {
 
   .vars      <- tidyselect::vars_select(names(.tbl_time), !!! rlang::quos(...))
-  row_number <- dplyr::row_number # some problem with using this in the filter
   index_quo  <- tibbletime::get_index_quo(.tbl_time)
 
   # Must select something
-  if(length(.vars) == 0) {
-    glue_stop("Must select at least 1 column to calculate return for.")
-  }
+  assert_.vars_selected(.vars)
 
-  .tbl_time %>%
-    tibbletime::as_period(period = period, side = "end",
-                          start_date = start_date, include_endpoints = TRUE) %>%
-    dplyr::mutate_at(.vars = .vars,
-                     .funs = dplyr::funs(rlang::UQ(suffix) := calculate_return_vector(., type = type))) %>%
-    dplyr::filter(row_number() != 1L) %>%
-    dplyr::select(!!!dplyr::groups(.tbl_time), !!index_quo, tidyselect::one_of(paste0(.vars, "_", suffix)))
+  # Change periods. Including endpoints results in something we can
+  # calculate correct returns on
+  .tbl_time_periodized <- tibbletime::as_period(
+    .tbl_time         = .tbl_time,
+    period            = period,
+    start_date        = start_date,
+    side              = "end",
+    include_endpoints = TRUE
+  )
+
+  # Add on returns
+  .tbl_time_returns <- dplyr::mutate_at(
+    .tbl  = .tbl_time_periodized,
+    .vars = .vars,
+    .funs = dplyr::funs(
+      !! suffix := calculate_return_vector(., type = type)
+    )
+  )
+
+  # Remove first row with 0 return (slice would reorder)
+  # row_number <- dplyr::row_number
+  # dplyr::filter(.tbl_time_returns, row_number() != 1L)
+  .tbl_time_returns
 }
 
-#' @param .p A vector of prices.
-#'
-#' @rdname calculate_return
-#' @export
 calculate_return_vector <- function(.p, type = "arithmetic") {
 
   validate_type(type)
@@ -64,6 +83,9 @@ calculate_return_vector <- function(.p, type = "arithmetic") {
 
   }
 
+  # Ensure first value is 0, not NA. Eases calculation
+  ret[1] <- 0
+
   ret
 }
 
@@ -72,3 +94,11 @@ validate_type <- function(type) {
     stop("Unsupported return calculation type.")
   }
 }
+
+assert_.vars_selected <- function(.vars) {
+  assertthat::assert_that(
+    length(.vars) > 0,
+    msg = "Must select at least 1 column to calculate return for"
+  )
+}
+

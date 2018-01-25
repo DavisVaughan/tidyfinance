@@ -2,20 +2,16 @@
 % Please edit documentation in R/calculate_return.R
 \name{calculate_return}
 \alias{calculate_return}
-\alias{calculate_return_vector}
 \title{Calculate returns at specified intervals}
 \usage{
 calculate_return(.tbl_time, ..., type = "arithmetic", period = "daily",
   start_date = NULL, suffix = "return")
-
-calculate_return_vector(.p, type = "arithmetic")
 }
 \arguments{
 \item{.tbl_time}{A \code{tbl_time} object}
 
 \item{...}{The columns to calculate returns for.
-One or more unquoted column names separated by commas.
-Positive values select variables; negative values drop variables.}
+One or more unquoted column names separated by commas.}
 
 \item{type}{Either \code{"arithmetic"} or \code{"log"} returns.}
 
@@ -30,17 +26,18 @@ Note that you can pass the specification in a flexible way:
 }
 
 This shorthand is available for year, quarter, month, day, hour, minute,
-and second periodicities. Note that "m" is the 1 letter specification used
-for "month" and "M" is used for "minute". Otherwise case does not matter.}
+second, millisecond and microsecond periodicities.
 
-\item{start_date}{Optional argument used to specify the start date for the
+Additionally, you have the option of passing in a vector of dates to
+use as custom and more flexible boundaries.}
+
+\item{start_date}{Optional argument used to
+specify the start date for the
 first group. The default is to start at the closest period boundary
 below the minimum date in the supplied index.}
 
 \item{suffix}{For each column specified in \code{...}, this is the suffix that
 is appended onto the name of the new column that corresponds to the return.}
-
-\item{.p}{A vector of prices.}
 }
 \description{
 Calculate arithmetic or log returns at specified periods.
