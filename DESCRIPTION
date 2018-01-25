@@ -1,4 +1,4 @@
-Package: tidyquant2
+Package: tidyfinance
 Type: Package
 Title: Tidy Financial Analysis
 Version: 0.0.0.9000
