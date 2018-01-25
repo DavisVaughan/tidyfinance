@@ -6,6 +6,10 @@
 \usage{
 annualization_multiplier(period)
 }
+\arguments{
+\item{period}{The period at which to calculate an annualization factor for.
+Either a supported character ("day", "week", "month", "quarter", "year") or a numeric.}
+}
 \description{
 Specify either a character annualization period or a numeric annualization multiplier of
 your own.

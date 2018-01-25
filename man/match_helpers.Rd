@@ -9,6 +9,11 @@ matches_ohlca(vars = NULL)
 
 matches_ohlcav(vars = NULL)
 }
+\arguments{
+\item{vars}{A character vector of variable names. When called
+from inside selecting functions like \code{\link[dplyr:select]{dplyr::select()}} these are
+automatically set to the names of the table.}
+}
 \description{
 Extensions of the family of "select helpers" from \code{tidyselect} like
 \code{\link[tidyselect:contains]{tidyselect::contains()}} and \code{\link[tidyselect:matches]{tidyselect::matches()}}. \code{matches_ohlca()} selects the

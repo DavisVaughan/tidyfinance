@@ -3,15 +3,14 @@
 #' `drawdown()` calculates a vector of drawdowns. `drawdown_max()` calculates
 #' the single largest negative drawdown over the period of returns specified.
 #'
+#' @inheritParams cumulative_return
+#'
 #' @details
 #'
 #' Drawdown is a measure of how long it takes to recoup losses after a fall
 #' from a previous high. The more negative the drawdown, the larger the loss.
 #' The longer it takes to get back to 0 drawdown, the longer you are
 #' "underwater."
-#'
-#' @examples
-#'
 #'
 #'
 #' @export
@@ -24,6 +23,7 @@ drawdown <- function(.r, type = "arithmetic") {
 
 
 #' @export
+#' @rdname drawdown
 drawdown_max <- function(.r, type = "arithmetic") {
   min(drawdown(.r, type))
 }

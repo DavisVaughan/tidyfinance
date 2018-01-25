@@ -6,6 +6,8 @@
 \alias{as_tbl_time}
 \alias{reexports}
 \alias{\%>\%}
+\alias{reexports}
+\alias{:=}
 \title{Objects exported from other packages}
 \keyword{internal}
 \description{
@@ -14,6 +16,8 @@ below to see their documentation.
 
 \describe{
   \item{dplyr}{\code{\link[dplyr]{\%>\%}}}
+
+  \item{rlang}{\code{\link[rlang]{:=}}}
 
   \item{tibbletime}{\code{\link[tibbletime]{as_tbl_time}}}
 }}

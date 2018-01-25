@@ -3,6 +3,9 @@
 #' Specify either a character annualization period or a numeric annualization multiplier of
 #' your own.
 #'
+#' @param period The period at which to calculate an annualization factor for.
+#' Either a supported character ("day", "week", "month", "quarter", "year") or a numeric.
+#'
 #' @details
 #'
 #' The following character annualization specifications are supported.
@@ -18,6 +21,8 @@
 #' annualization_multiplier("day")
 #' annualization_multiplier("2 day")
 #' annualization_multiplier(250)
+#'
+#' @export
 #'
 annualization_multiplier <- function(period) {
 

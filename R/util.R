@@ -10,6 +10,17 @@ tibbletime::as_tbl_time
 #'
 dplyr::`%>%`
 
+#' @importFrom rlang :=
+#'
+rlang::`:=`
+
+# Globals ----------------------------------------------------------------------
+
+globalVariables(".")
+
+# Utils ------------------------------------------------------------------------
+
+
 glue_stop <- function(..., .sep = "") {
   stop(glue::glue(..., .sep, .envir = parent.frame()), call. = FALSE)
 }

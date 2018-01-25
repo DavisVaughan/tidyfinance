@@ -5,6 +5,8 @@
 #' columns `open`, `high`, `low`, `close`, and `adjusted`. `matches_ohlcav()`
 #' additionally matches `volume`.
 #'
+#' @inheritParams tidyselect::matches
+#'
 #' @details
 #'
 #' As a user, you should rarely, if ever, need to specify `vars`.
